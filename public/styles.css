@@ -6,3 +6,27 @@
 body {
   background: #ccc;
 }
+
+.error {
+ color: rgb(235, 67, 67);
+}
+
+form {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+form input:first-child {
+  margin-bottom: 5px;
+}
+
+input[type="submit"] {
+  color: rgb(39, 179, 39);
+  font-size: 16px;
+  font-weight: bold;
+  padding: 5px 10px;
+  margin: 5px 10px;
+  border: none;
+  background-color: #f1eaea;
+}
