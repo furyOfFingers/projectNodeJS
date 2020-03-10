@@ -2,7 +2,8 @@ const http = require("http");
 const fs = require("fs");
 const path = require("path");
 const { parse } = require('querystring');
-const bodyParser = require('body-parser');
+var bodyParser = require('body-parser');
+const chalk = require('chalk');
 
 
 
@@ -73,42 +74,15 @@ const server = http.createServer((req, res) => {
     });
 
     req.on("end", function() {
-      // console.log('parseBody', parse(body));
-      console.log('body["log"], body["pas"]', body['log'], body['pas']);
-      console.log('body.log, body.pas', body.log, body.pas);
       console.log("typeof Body: " + typeof body);
       console.log("Body: " + body);
-      console.log("log and pas", body.log, body.pas);
-      console.log('stringornot', body[0], body[1])
-      // response.writeHead(200, { "Content-Type": "text/html" });
     });
-    for(let el in body) {
-      console.log('let el in body', el)
-    }
-    // for(let el of body) {
-    //   console.log('let el of body', el)
-    // }
-    if (body && body.log == "admin" && body && body.pas == "admin") {
-      console.log("WOWWOWWOW");
-    }
   }
-
-  // server.use(bodyParser.json());
-  // server.use(bodyParser.urlencoded({ extended: true }));
-
-  // server.get('/user', function (req, res, next) {
-  //   let data = req.body;
-
-  //   data.forEach(function (el) {
-  //     console.log(el.log);
-  //     console.log(el.pas);
-  //   });
-  // });
 });
 
 const HOSTNAME = "127.0.0.1";
 const PORT = process.env.PORT || 8888;
 
 server.listen(PORT, HOSTNAME, () => {
-  console.log(`Server has been started on http://${HOSTNAME}:${PORT}/`);
+  console.log(chalk.bgGreen(`Server has been started on http://${HOSTNAME}:${PORT}/`));
 });
