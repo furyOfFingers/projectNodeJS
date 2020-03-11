@@ -32,5 +32,5 @@ let formBlock = document.querySelector("form");
 formPrevent = event => {
   event.preventDefault();
 };
-formBlock.addEventListener("click", formPrevent);
+// formBlock.addEventListener("click", formPrevent);
 // END

@@ -5,20 +5,15 @@ const { parse } = require('querystring');
 var bodyParser = require('body-parser');
 const chalk = require('chalk');
 
-
-
 const server = http.createServer((req, res) => {
   let argFilePath;
-
   switch (req.url) {
     case "/?log=admin&pas=admin":
       argFilePath = "home.html";
       break;
-
     case "/":
       argFilePath = "index.html";
       break;
-
     default:
       argFilePath = req.url;
   }
@@ -26,24 +21,19 @@ const server = http.createServer((req, res) => {
   let filePath = path.join(__dirname, "public", argFilePath);
   const ext = path.extname(filePath);
   let contentType = "text/html";
-
   switch (ext) {
     case ".css":
       contentType = "text/css";
       break;
-
     case ".js":
       contentType = "text/javascript";
       break;
-
     default:
       contentType = "text/html";
   }
-
   if (!ext) {
     filePath += ".html";
   }
-
   fs.readFile(filePath, (err, content) => {
     if (err) {
       fs.readFile(path.join(__dirname, "public", "error.html"), (err, data) => {
@@ -64,25 +54,24 @@ const server = http.createServer((req, res) => {
       res.end(content);
     }
   });
-
-  let body;
-  //прием, который надо вынести
+  let body = {};
+  //надо вынести
   if (req.method === "POST") {
     console.log(req.method, "method");
-    req.on("data", function(data) {
-      body = data;
+    req.on("data", (data) => {
+      body = JSON.parse(data);
     });
 
-    req.on("end", function() {
-      console.log("typeof Body: " + typeof body);
-      console.log("Body: " + body);
+    req.on("end", () => {
+      console.log(`endBody: body.log-${body.log}; body.pas-${body.pas}`);
+      if (body.log === 'admin' && body.pas === 'admin') {
+        console.log('hell YEEE')
+      }
     });
   }
 });
-
 const HOSTNAME = "127.0.0.1";
 const PORT = process.env.PORT || 8888;
-
 server.listen(PORT, HOSTNAME, () => {
   console.log(chalk.bgGreen(`Server has been started on http://${HOSTNAME}:${PORT}/`));
 });
