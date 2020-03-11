@@ -1,12 +1,11 @@
 const http = require("http");
 const fs = require("fs");
 const path = require("path");
-const { parse } = require('querystring');
-var bodyParser = require('body-parser');
 const chalk = require('chalk');
 
 const server = http.createServer((req, res) => {
   let argFilePath;
+  /** В зависимости от url присваивает имя файла для открытия. */
   switch (req.url) {
     case "/?log=admin&pas=admin":
       argFilePath = "home.html";
@@ -54,6 +53,7 @@ const server = http.createServer((req, res) => {
       res.end(content);
     }
   });
+
   let body = {};
   //надо вынести
   if (req.method === "POST") {

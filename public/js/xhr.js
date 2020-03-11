@@ -15,12 +15,12 @@ loginFunc = () => {
 
   xhr.setRequestHeader("Content-Type", "application/json");
   xhr.send(JSON.stringify(userData));
-  xhr.onload = function() {
-    console.log(this.responseURL, "responseURL");
-    console.log(this.responseType, "responseType");
-    console.log(this.HEADERS_RECEIVED, "HEADERS_RECEIVED");
+  xhr.onload = () => {
+    // console.log(this.responseURL, "responseURL");
+    // console.log(this.responseType, "responseType");
+    // console.log(this.HEADERS_RECEIVED, "HEADERS_RECEIVED");
   };
-  xhr.onerror = function() {
+  xhr.onerror = () => {
     alert("server error");
   };
 };
@@ -32,5 +32,5 @@ let formBlock = document.querySelector("form");
 formPrevent = event => {
   event.preventDefault();
 };
-// formBlock.addEventListener("click", formPrevent);
+formBlock.addEventListener("click", formPrevent);
 // END
