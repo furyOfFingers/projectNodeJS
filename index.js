@@ -65,6 +65,36 @@ const server = http.createServer((req, res) => {
     req.on("end", () => {
       console.log(`endBody: body.log-${body.log}; body.pas-${body.pas}`);
       if (body.log === 'admin' && body.pas === 'admin') {
+
+        const data = JSON.stringify({
+          todo: 'Buy the milk'
+        })
+
+        const options = {
+          hostname: '127.0.0.1',
+          port: 8888,
+          path: '/home',
+          method: 'POST',
+          headers: {
+            'Content-Type': "text/html",
+            'Content-Length': data.length
+          }
+        }
+
+        const req = http.request(options, (res) => {
+          console.log(`statusCode: ${res.statusCode}`)
+
+          res.on('data', (d) => {
+            process.stdout.write(d)
+          })
+        })
+
+        req.on('error', (error) => {
+          console.error(chalk.bgRed(error,' error with post request from server'))
+        })
+
+        req.write(data)
+
         console.log('hell YEEE')
       }
     });
